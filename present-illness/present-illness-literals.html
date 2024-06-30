@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Illness Literals</title>
+    <link rel="stylesheet" href="pi-style.css">
+    <script>
+        window.onload = function () {
+            const LITERALS = new XMLHttpRequest();
+            LITERALS.open('GET', 'persent-illness-literals.txt');
+            LITERALS.onreadystatechange = function () { document.getElementById('literal-layout').textContent = LITERALS.responseText };
+            LITERALS.send();
+        };
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Present Illness Literals</h1>
+            <p class="close-page">
+                <button type="button" onclick="window.close();">&larr; Back</button>
+            </p>
+            <div class="font-size">
+                <label for="font-size">Font size:</label>
+                <button type="button" onclick="Javascript:changeFontSize('minus');">-</button>
+                <input type="number" id="font-size" value="12" onchange="Javascript:setLayoutFontSize();">
+                <button type="button" onclick="Javascript:changeFontSize('plus');">+</button>
+            </div>
+        </div>
+    </header>
+    <section class="literal-layout">
+        <div class="container">
+            <pre id="literal-layout" style="font-size: 12px;"></pre>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> YH</p>
+        </div>
+    </footer>
+    <script>
+        function setLayoutFontSize () {
+            document.getElementById('literal-layout').style.fontSize = document.getElementById('font-size').value + 'px';
+        };
+        function changeFontSize (symbol) {
+            var fontSize = parseInt(document.getElementById('font-size').value);
+            console.log(fontSize, typeof fontSize);
+            switch (symbol) {
+                case 'minus':
+                    fontSize -= 1;
+                    break;
+                case 'plus':
+                    fontSize += 1;
+                    break;
+            };
+            console.log(fontSize, typeof fontSize);
+            document.getElementById('font-size').value = fontSize.toString();
+            setLayoutFontSize();
+        }
+    </script>
+</body>
+</html>

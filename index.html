@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>病歷寫作大師</h1>
+        </div>
+    </header>
+    <section class="file-data">
+        <div class="container">
+            <h3>File Data</h3>
+            <div class="patient-data">
+                <label for="patient-id">ID: </label>
+                <input id="patient-id" type="text">
+            </div>
+            <div class="patient-data">
+                <label for="patient-age">Age: </label>
+                <input id="patient-age" type="number">
+                <select id="patient-age-unit">
+                    <option value="y" selected>year(s)</option>
+                    <option value="m">month(s)</option>
+                    <option value="d">day(s)</option>
+                </select>
+            </div>
+            <div class="patient-data">
+                <label>Sex: </label>
+                <span>
+                    <input type="radio" name="patient-sex" id="patient-sex-m" value="m">
+                    <label for="patient-sex-m">M</label>
+                </span>
+                <span>
+                    <input type="radio" name="patient-sex" id="patient-sex-f" value="f">
+                    <label for="patient-sex-f">F</label>
+                </span>
+            </div>
+            <div class="doctor-data">
+                <label for="resident-id">Resident: </label>
+                <input id="resident-id" type="text">
+                <label for="vs-id">Visiting Staff: </label>
+                <input id="vs-id" type="text">
+            </div>
+            <div class="admission-date">
+                <label for="admission-date">Admission Date: </label>
+                <input id="admission-date" type="date">
+                <button type="button" onclick="Javascript:loadToday();">Today</button>
+            </div>
+        </div>
+    </section>
+    <section class="chief-complaint">
+        <div class="container">
+            <h3>Chief Complaint</h3>
+            <form action="Javascript:chiefComplaint();">
+                <div>
+                    <label for="chief-complaint-input">Chief Complaint:</label>
+                    <br>
+                    <textarea id="chief-complaint-input"></textarea>
+                </div>
+                <div class="informant">
+                    <label>Informant:</label>
+                    <br>
+                    <span>
+                        <input type="checkbox" id="informant-patient" value="patient" checked>
+                        <label for="informant-patient">Patient</label>
+                    </span>
+                    <span>
+                        <input type="checkbox" id="informant-records" value="medical records" checked>
+                        <label for="informant-records">Medical Records</label>
+                    </span>
+                    <br>
+                    <span>
+                        <input type="checkbox" id="informant-father" value="father">
+                        <label for="informant-father">Patient's Father</label>
+                    </span>
+                    <span>
+                        <input type="checkbox" id="informant-mother" value="mother">
+                        <label for="informant-mother">Patient's Mother</label>
+                    </span>
+                    <br>
+                    <span>
+                        <input type="checkbox" id="informant-brother" value="brother">
+                        <label for="informant-brother">Patient's Brother</label>
+                    </span>
+                    <span>
+                        <input type="checkbox" id="informant-sister" value="sister">
+                        <label for="informant-sister">Patient's Sister</label>
+                    </span>
+                    <br>
+                    <span>
+                        <input type="checkbox" id="informant-son" value="son">
+                        <label for="informant-son">Patient's Son</label>
+                    </span>
+                    <span>
+                        <input type="checkbox" id="informant-daughter" value="daughter">
+                        <label for="informant-daughter">Patient's Daughter</label>
+                    </span>
+                </div>
+                <div>
+                    <label for="referred-hospital">Referral:</label>
+                    <input type="text" id="referred-hospital">
+                </div>
+                <div>
+                    <label for="chief-complaint-output">Output:</label>
+                    <button type="submit">Show</button>
+                    <button type="button" onclick="Javascript:copyText(this);">Copy</button>
+                    <span></span>
+                    <br>
+                    <textarea id="chief-complaint-output"></textarea>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="brief-history">
+        <div class="container">
+            <h3>Brief History</h3>
+            <form action="Javascript:briefHistory();">
+                <div>
+                    <input type="checkbox" id="is-history-taken-by-student" checked>
+                    <label for="student-name">Student:</label>
+                    <input type="text" id="student-name">
+                    <label for="supervisor-name">Supervisor:</label>
+                    <input type="text" id="supervisor-name">
+                </div>
+                <div>
+                    <label for="present-illness-input">Present Illness:</label>
+                    <a href="/present-illness/present-illness-literals.html" onclick="window.open('./present-illness/present-illness-literals.html', 'newwindow', 'width=640,height=480'); return false;">Show literals</a>
+                    <br>
+                    <textarea id="present-illness-input"></textarea>
+                </div>
+                <div>
+                    <p>Past History</p>
+                </div>
+                <div>
+                    <p>Past Medical History:</p>
+                    <span>
+                        <input type="checkbox" id="pmh-htn" value="hypertension">
+                        <label for="pmh-htn">HTN</label>
+                    </span>
+                    <span>
+                        <input type="checkbox" id="pmh-dm" value="diabetes mellitus">
+                        <label for="pmh-dm">DM</label>
+                    </span>
+                    <span>
+                        <input type="checkbox" id="pmh-lipid" value="hyperlipidemia">
+                        <label for="pmh-lipid">Hyperlipidemia</label>
+                    </span>
+                    <br>
+                    <span>
+                        <input type="checkbox" id="pmh-cad" value="coronary arterial disease">
+                        <label for="pmh-cad">CAD</label>
+                    </span>
+                    <span>
+                        <input type="checkbox" id="pmh-stroke" value="stroke">
+                        <label for="pmh-stroke">Stroke</label>
+                    </span>
+                    <span>
+                        <input type="checkbox" id="pmh-ckd" value="chronic kindey disease">
+                        <label for="pmh-ckd">CKD</label>
+                    </span>
+                </div>
+                <div>
+                    <p>Current Medication:</p>
+                    <div class="format-settings">
+                        <input type="checkbox" id="is-formatting" onclick="Javascript:checkFormatting(this)" checked>
+                        <label for="is-formatting">Formatting</label>
+                        <select name="cm-bullet" id="cm-bullet">
+                            <optgroup label="ul">
+                                <option value="-">-</option>
+                                <option value=".">.</option>
+                                <option value="*">*</option>
+                                <option value="+">+</option>
+                                <option value="#">#</option>
+                            </optgroup>
+                            <optgroup label="ol">
+                                <option value="#." selected>#.</option>
+                                <option value="1">1</option>
+                                <option value="1.">1.</option>
+                                <option value="(1)">(1)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="ntuh-drugs">NTUH:</label>
+                        <br>
+                        <textarea id="ntuh-drugs"></textarea>
+                    </div>
+                    <div>
+                        <label for="other-drugs">Others:</label>
+                        <br>
+                        <textarea id="other-drugs"></textarea>
+                    </div>
+                    <div>
+                        <label for="herbal-drugs">Chinese Herbs:</label>
+                        <br>
+                        <textarea id="herbal-drugs"></textarea>
+                    </div>
+                    <div>
+                        <label for="health-supplements">Health Supplements:</label>
+                        <br>
+                        <textarea id="health-supplements"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <p>Allergies:</p>
+                    <div class="allergy-drugs">
+                        <label>Food and drug allergies:</label>
+                        <input type="checkbox" id="is-allergy-drugs-denied" onclick="Javascript:checkAllergy(this)" checked>
+                        <label for="is-allergy-drugs-denied">denied</label>
+                        <table id="allergy-drugs-table" style="display:none;">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Adverse effect</th>
+                                    <th><button type="button" onclick="Javascript:addAllergyRows(this);">+</button></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><button type="button" onclick="Javascript:removeAllergyRows(this);">-</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="allergy-materials">
+                        <label>Allergy to medical devices and materals:</label>
+                        <input type="checkbox" id="is-allergy-materials-denied" onclick="Javascript:checkAllergy(this)" checked>
+                        <label for="is-allergy-materials-denied">denied</label>
+                        <table id="allergy-drugs-table" style="display:none;">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Adverse effect</th>
+                                    <th><button type="button" onclick="Javascript:addAllergyRows(this);">+</button></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><button type="button" onclick="Javascript:removeAllergyRows(this);"">-</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <p>Social History and Habits:</p>
+                    <div class="habits-alcohol">
+                        <input type="checkbox" id="is-alcohol" onclick="Javascript:checkHabits(this)">
+                        <label for="is-alcohol">Alcohol:</label>
+                        <input type="number" id="habit-alc-amount" disabled>
+                        <label>cups of</label>
+                        <input type="text" id="habit-alc-type" disabled>
+                        <label>or</label>
+                        <input type="number" id="habit-alc-unit" disabled>
+                        <label for="habit-alc-unit">alcohol(s) or</label>
+                        <input type="checkbox" id="habit-alc-social" disabled>
+                        <label for="habit-alc-social">social drinking</label>
+                    </div>
+                    <div class="habits-betel-nuts">
+                        <input type="checkbox" id="is-betel-nuts" onclick="Javascript:checkHabits(this)">
+                        <label for="is-betel-nuts">Betel nuts:</label>
+                        <input type="number" id="habit-btn-amount" disabled>
+                        <label>PPD for</label>
+                        <input type="number" id="habit-btn-duration" disabled>
+                        <label>year(s), quitted for</label>
+                        <input type="number" id="habit-btn-quitted-duration" disabled>
+                        <label>year(s)</label>
+                    </div>
+                    <div class="habits-smoking">
+                        <input type="checkbox" id="is-smoking" onclick="Javascript:checkHabits(this)">
+                        <label for="is-smoking">Smoking:</label>
+                        <input type="number" id="habit-smoke-amount" disabled>
+                        <label>PPD for</label>
+                        <input type="number" id="habit-smoke-duration" disabled>
+                        <label>year(s), quitted for</label>
+                        <input type="number" id="habit-smoke-quitted-duration" disabled>
+                        <label>year(s)</label>
+                    </div>
+                    <div class="habits-illicit-drugs">
+                        <input type="checkbox" id="is-illicit-drugs" onclick="Javascript:checkHabits(this)">
+                        <label for="is-illicit-drugs">Illicit drugs:</label>
+                        <label>use</label>
+                        <input type="text" id="habit-drug-type" disabled>
+                        <label>for</label>
+                        <input type="text" id="habit-drug-frq" disabled>
+                        <label>frequency through</label>
+                        <input type="text" id="habit-drug-path" disabled>
+                        <label>for</label>
+                        <input type="number" id="habit-drug-duration" disabled>
+                        <label>year(s), quitted for</label>
+                        <input type="number" id="habit-drug-quitted-duration" disabled>
+                        <label>year(s)</label>
+                    </div>
+                </div>
+                <div>
+                    <label for="brief-history-output">Output:</label>
+                    <button type="submit">Show</button>
+                    <button type="button" onclick="Javascript:copyText(this);">Copy</button>
+                    <br>
+                    <textarea id="brief-history-output"></textarea>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script>
+        document.getElementById('admission-date').value = new Date().toISOString().substring(0, 10);
+    </script>
+</body>
+</html>

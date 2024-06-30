@@ -1,0 +1,25 @@
+body {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='598' height='245' viewBox='0 0 600 120' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3ctext x='30' y='40' fill='red'%3eWIP%3c/text%3e%3c/svg%3e ");
+    display: block;
+    margin: 0;
+}
+
+textarea {
+    width: 35vw;
+    height: 20vh;
+    font-size: 1rem;
+}
+
+.container {
+    margin: 0 2rem;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid #8c8c8c;
+    letter-spacing: 1px;
+}
+
+th, td {
+    border: 1px solid #a0a0a0;
+}
