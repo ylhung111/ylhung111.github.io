@@ -33,7 +33,7 @@ function chiefComplaint () {
         default:
             possessive = 'their';
     };
-    const INFORMANTS = [...document.querySelectorAll('.informant>input')].filter(isChecked);
+    const INFORMANTS = [...document.querySelectorAll('.informant>span>input')].filter(isChecked);
     let isPatient = false, isMR = false;
     for (index in INFORMANTS) {
         console.log(INFORMANTS[index])
