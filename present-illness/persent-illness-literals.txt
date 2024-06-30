@@ -1,7 +1,0 @@
-This is a -year-old woman with the following past medical history:
-
-#. 
-
-The patient had been his/her usual state of health until ___ days before this admission, when ___ developed.
-
-Under the diagnosis of ___, the patient was admitted to our ward for ___.
