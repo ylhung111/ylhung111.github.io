@@ -5,6 +5,20 @@ Object.defineProperty(String.prototype, 'capitalize', {
     enumerable: false
   }
 );
+function uniqueArray (arr) {
+    var seen = {};
+    var out = [];
+    var len = arr.length;
+    var j = 0;
+    for(var i = 0; i < len; i++) {
+         var item = arr[i];
+         if(seen[item] !== 1) {
+               seen[item] = 1;
+               out[j++] = item;
+         }
+    }
+    return out;
+};
 function isChecked (checkbox) {
     return checkbox.checked
 };
@@ -17,7 +31,7 @@ function copyText (btn) {
 };
 function loadToday () {
     document.getElementById('admission-date').value = new Date().toISOString().substring(0, 10);
-}
+};
 function chiefComplaint () {
     var outputString = new String();
     const PAT_SEX = document.querySelector('input[name="patient-sex"]:checked')
@@ -33,10 +47,9 @@ function chiefComplaint () {
         default:
             possessive = 'their';
     };
-    const INFORMANTS = [...document.querySelectorAll('.informant>span>input')].filter(isChecked);
+    const INFORMANTS = [...document.querySelectorAll('.informant input')].filter(isChecked);
     let isPatient = false, isMR = false;
     for (index in INFORMANTS) {
-        console.log(INFORMANTS[index])
         if (INFORMANTS[index].value === 'patient') {
             isPatient = true;
         } else if (INFORMANTS[index].value === 'medical records') {
@@ -88,11 +101,7 @@ function chiefComplaint () {
     CCOUTPUT.textContent += '\n';
     CCOUTPUT.textContent += document.getElementById('chief-complaint-input').value;
 };
-function checkFormatting (checkbox) {
-    var select = checkbox.nextElementSibling.nextElementSibling;
-    select.disabled = !select.disabled;
-};
-function checkAllergy (checkbox) {
+function checkTable (checkbox) {
     var table = checkbox.nextElementSibling.nextElementSibling;
     if (checkbox.checked) {
         table.style.display = 'none';
@@ -100,7 +109,7 @@ function checkAllergy (checkbox) {
         table.style.display = 'table';
     };
 };
-function addAllergyRows (btn) {
+function addTableRows (btn) {
     const TABLE = btn.parentNode.parentNode.parentNode.parentNode;
     const TBODY = TABLE.getElementsByTagName('tbody')[0];
     const tr = document.createElement('tr'),
@@ -108,7 +117,7 @@ function addAllergyRows (btn) {
           button = document.createElement('button');
     input.setAttribute('type', 'text');
     button.setAttribute('type', 'button');
-    button.setAttribute('onclick', 'Javascript:removeAllergyRows(this);');
+    button.setAttribute('onclick', 'Javascript:removeTableRows(this);');
     button.appendChild(document.createTextNode('-'));
     for (var i = 0; i < 3; i += 1) {
         const td = document.createElement('td');
@@ -121,7 +130,7 @@ function addAllergyRows (btn) {
     };
     TBODY.appendChild(tr);
 };
-function removeAllergyRows (btn) {
+function removeTableRows (btn) {
     const ROW = btn.parentNode.parentNode;
     const TBODY = ROW.parentNode;
     TBODY.removeChild(ROW);
@@ -141,17 +150,96 @@ function checkHabits (checkbox) {
 };
 function briefHistory () {
     var outputString = new String();
+    // "History taken by ..."
     if (document.getElementById('is-history-taken-by-student').checked) {
         outputString += 'History taken by ';
         outputString += document.getElementById('student-name').value;
         outputString += ', revised by ';
         outputString += document.getElementById('supervisor-name').value;
         outputString += '\n\n';
-    }
+    };
+    // Get present illness
     const PRESENT_ILLNESS_TEXT = document.getElementById('present-illness-input').value;
+    // Write present illness
     outputString += '\[Present Illness\]\n';
     outputString += PRESENT_ILLNESS_TEXT;
     outputString += '\n\n';
+    // Set past history bullets
+    const bullets = new Array(), 
+        formatBullets = document.getElementsByClassName('ph-format-settings')[0].getElementsByTagName('select');
+    for (var i in Object.keys(formatBullets)) { bullets.push({'shape': formatBullets[i].value, 'count': 0}); };
+    // Set indentation
+    const INDENT = parseInt(document.getElementById('ph-indent').value);
+    // Get past medical history
+    var arrPastMedicalHistory = new Array(), 
+        nodePastMedicalHistory = document.getElementsByClassName('ph-past-medical-history')[0].querySelectorAll('input[id^=pmh-]')
+    for (var i in Object.keys(nodePastMedicalHistory)) {
+        if (nodePastMedicalHistory[i].checked === true) {
+            arrPastMedicalHistory.push(nodePastMedicalHistory[i].value);
+        };
+    };
+    // Write past medical history
     outputString += '\[Past History\]\n';
+    bullets[0]['count'] += 1;
+    outputString += bullets[0]['shape'].replace('0', bullets[0]['count'].toString());
+    outputString += ' Past medical history: '
+    if (arrPastMedicalHistory.length) {
+        outputString += arrPastMedicalHistory.join(' (+), ');
+        outputString += ' (+)\n';
+    } else {
+        outputString += 'no known history of systemic disease.\n';
+    };
+    // Get current medication
+    var arrCurrentMedication = new Array();
+        nodeCurrentMedication = document.getElementsByClassName('ph-current-medication')[0].getElementsByTagName('textarea');
+    for (var i in Object.keys(nodeCurrentMedication)) {
+        if (nodeCurrentMedication[i].value === undefined) {
+            arrCurrentMedication.push('');
+        } else {
+            arrCurrentMedication.push(nodeCurrentMedication[i].value.trim());
+        };
+    };
+    // Write current medication
+    bullets[0]['count'] += 1;
+    outputString += bullets[0]['shape'].replace('0', bullets[0]['count'].toString());
+    outputString += ' Current medication: \n';
+    for (var i = 0; i < arrCurrentMedication.length; i += 1) {
+        for (var _ = 0; _ < INDENT; _ += 1) { outputString += ' ' };
+        bullets[1]['count'] += 1;
+        outputString += bullets[1]['shape'].replace('0', bullets[1]['count'].toString());
+        outputString += ' ';
+        switch (i) {
+            case 0:
+                outputString += 'NTUH: ';
+                break;
+            case 1:
+                outputString += 'Others: ';
+                break;
+            case 2:
+                outputString += 'Chinese and herbal medicine: ';
+                break;
+            case 3:
+                outputString += 'Health supplements: ';
+                break;
+        };
+        if (arrCurrentMedication[i] === '') {
+            outputString += 'denied'
+            outputString += '\n';
+            continue;
+        };
+        var arrMedications = uniqueArray(arrCurrentMedication[i].split('\n'));
+        outputString += '\n';
+        for (var j = 0; j < arrMedications.length; j += 1) {
+            for (var k = 0; k < INDENT * 2; k += 1) { outputString += ' ' };
+            bullets[2]['count'] += 1;
+            outputString += bullets[2]['shape'].replace('0', bullets[2]['count'].toString());
+            outputString += ' ';
+            outputString += arrMedications[j];
+            outputString += '\n';
+        };
+        bullets[2]['count'] = 0;
+    };
+    bullets[1]['count'] = 0;
+    // Get Allergies
     document.getElementById('brief-history-output').textContent = outputString;
 };
