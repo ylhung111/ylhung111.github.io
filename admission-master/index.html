@@ -120,185 +120,337 @@
         <div class="container">
             <h3>Brief History</h3>
             <form action="Javascript:briefHistory();">
-                <div>
+                <div class="history-written-by-student">
                     <input type="checkbox" id="is-history-taken-by-student" checked>
                     <label for="student-name">Student:</label>
                     <input type="text" id="student-name">
                     <label for="supervisor-name">Supervisor:</label>
                     <input type="text" id="supervisor-name">
                 </div>
-                <div>
+                <div class="present-illness">
                     <label for="present-illness-input">Present Illness:</label>
                     <a href="/present-illness/present-illness-literals.html" onclick="window.open('./present-illness/present-illness-literals.html', 'newwindow', 'width=640,height=480'); return false;">Show literals</a>
                     <br>
                     <textarea id="present-illness-input"></textarea>
                 </div>
-                <div>
+                <div class="past-history">
                     <p>Past History</p>
-                </div>
-                <div>
-                    <p>Past Medical History:</p>
-                    <span>
-                        <input type="checkbox" id="pmh-htn" value="hypertension">
-                        <label for="pmh-htn">HTN</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" id="pmh-dm" value="diabetes mellitus">
-                        <label for="pmh-dm">DM</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" id="pmh-lipid" value="hyperlipidemia">
-                        <label for="pmh-lipid">Hyperlipidemia</label>
-                    </span>
-                    <br>
-                    <span>
-                        <input type="checkbox" id="pmh-cad" value="coronary arterial disease">
-                        <label for="pmh-cad">CAD</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" id="pmh-stroke" value="stroke">
-                        <label for="pmh-stroke">Stroke</label>
-                    </span>
-                    <span>
-                        <input type="checkbox" id="pmh-ckd" value="chronic kindey disease">
-                        <label for="pmh-ckd">CKD</label>
-                    </span>
-                </div>
-                <div>
-                    <p>Current Medication:</p>
-                    <div class="format-settings">
-                        <input type="checkbox" id="is-formatting" onclick="Javascript:checkFormatting(this)" checked>
-                        <label for="is-formatting">Formatting</label>
-                        <select name="cm-bullet" id="cm-bullet">
+                    <div class="ph-format-settings">
+                        <label for="ph-is-formatting">Format:</label>
+                        <select name="ph-bullet-1" id="ph-bullet-1">
                             <optgroup label="ul">
                                 <option value="-">-</option>
                                 <option value=".">.</option>
                                 <option value="*">*</option>
                                 <option value="+">+</option>
                                 <option value="#">#</option>
+                                <option value=">">></option>
+                            </optgroup>
+                            <optgroup label="ol">
+                                <option value="#.">#.</option>
+                                <option value="0">1</option>
+                                <option value="0." selected>1.</option>
+                                <option value="(0)">(1)</option>
+                            </optgroup>
+                        </select>
+                        <label>></label>
+                        <select name="ph-bullet-2" id="ph-bullet-2">
+                            <optgroup label="ul">
+                                <option value="-" selected>-</option>
+                                <option value=".">.</option>
+                                <option value="*">*</option>
+                                <option value="+">+</option>
+                                <option value="#">#</option>
+                                <option value=">">></option>
+                            </optgroup>
+                            <optgroup label="ol">
+                                <option value="0.">#.</option>
+                                <option value="0">1</option>
+                                <option value="0.">1.</option>
+                                <option value="(0)">(1)</option>
+                            </optgroup>
+                        </select>
+                        <label>></label>
+                        <select name="ph-bullet-3" id="ph-bullet-3">
+                            <optgroup label="ul">
+                                <option value="-">-</option>
+                                <option value=".">.</option>
+                                <option value="*">*</option>
+                                <option value="+">+</option>
+                                <option value="#">#</option>
+                                <option value=">">></option>
                             </optgroup>
                             <optgroup label="ol">
                                 <option value="#." selected>#.</option>
-                                <option value="1">1</option>
-                                <option value="1.">1.</option>
-                                <option value="(1)">(1)</option>
+                                <option value="0">1</option>
+                                <option value="0.">1.</option>
+                                <option value="(0)">(1)</option>
                             </optgroup>
                         </select>
+                        <label>></label>
+                        <select name="ph-bullet-4" id="ph-bullet-4">
+                            <optgroup label="ul">
+                                <option value="-">-</option>
+                                <option value=".">.</option>
+                                <option value="*">*</option>
+                                <option value="+">+</option>
+                                <option value="#">#</option>
+                                <option value=">" selected>></option>
+                            </optgroup>
+                            <optgroup label="ol">
+                                <option value="#.">#.</option>
+                                <option value="0">1</option>
+                                <option value="0.">1.</option>
+                                <option value="(0)">(1)</option>
+                            </optgroup>
+                        </select>
+                        <label>indentation:</label>
+                        <input type="number" id="ph-indent" value="2" step="1">
+                        <label>space(s)</label>
                     </div>
-                    <div>
-                        <label for="ntuh-drugs">NTUH:</label>
+                    <div class="ph-past-medical-history">
+                        <p>Past Medical History:</p>
+                        <span>
+                            <input type="checkbox" id="pmh-htn" value="hypertension">
+                            <label for="pmh-htn">HTN</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" id="pmh-dm" value="diabetes mellitus">
+                            <label for="pmh-dm">DM</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" id="pmh-lipid" value="hyperlipidemia">
+                            <label for="pmh-lipid">Hyperlipidemia</label>
+                        </span>
                         <br>
-                        <textarea id="ntuh-drugs"></textarea>
-                    </div>
-                    <div>
-                        <label for="other-drugs">Others:</label>
+                        <span>
+                            <input type="checkbox" id="pmh-cad" value="coronary arterial disease">
+                            <label for="pmh-cad">CAD</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" id="pmh-stroke" value="stroke">
+                            <label for="pmh-stroke">Stroke</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" id="pmh-ckd" value="chronic kindey disease">
+                            <label for="pmh-ckd">CKD</label>
+                        </span>
                         <br>
-                        <textarea id="other-drugs"></textarea>
+                        <span>
+                            <input type="checkbox" id="pmh-gerd" value="gastrointestinal reflux disease">
+                            <label for="pmh-gerd">GERD</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" id="pmh-insomnia" value="insomnia">
+                            <label for="pmh-insomnia">Insomnia</label>
+                        </span>
                     </div>
-                    <div>
-                        <label for="herbal-drugs">Chinese Herbs:</label>
-                        <br>
-                        <textarea id="herbal-drugs"></textarea>
+                    <div class="ph-current-medication">
+                        <p>Current Medication:</p>
+                        <div>
+                            <label for="ph-ntuh-drugs">NTUH:</label>
+                            <br>
+                            <textarea id="ph-ntuh-drugs"></textarea>
+                        </div>
+                        <div>
+                            <label for="ph-other-drugs">Others:</label>
+                            <br>
+                            <textarea id="ph-other-drugs"></textarea>
+                        </div>
+                        <div>
+                            <label for="ph-herbal-drugs">Chinese Herbs:</label>
+                            <br>
+                            <textarea id="ph-herbal-drugs"></textarea>
+                        </div>
+                        <div>
+                            <label for="ph-health-supplements">Health Supplements:</label>
+                            <br>
+                            <textarea id="ph-health-supplements"></textarea>
+                        </div>
                     </div>
-                    <div>
-                        <label for="health-supplements">Health Supplements:</label>
-                        <br>
-                        <textarea id="health-supplements"></textarea>
+                    <div class="ph-allergy">
+                        <p>Allergies:</p>
+                        <div class="allergy-drugs">
+                            <label>Food and drug allergies:</label>
+                            <input type="checkbox" id="is-allergy-drugs-denied" onclick="Javascript:checkTable(this)" checked>
+                            <label for="is-allergy-drugs-denied">denied</label>
+                            <table id="allergy-drugs-table" style="display:none;">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Adverse effect</th>
+                                        <th><button type="button" onclick="Javascript:addTableRows(this);">+</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                        <td><button type="button" onclick="Javascript:removeTableRows(this);">-</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="allergy-materials">
+                            <label>Allergy to medical devices and materals:</label>
+                            <input type="checkbox" id="is-allergy-materials-denied" onclick="Javascript:checkTable(this)" checked>
+                            <label for="is-allergy-materials-denied">denied</label>
+                            <table id="allergy-drugs-table" style="display:none;">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Adverse effect</th>
+                                        <th><button type="button" onclick="Javascript:addTableRows(this);">+</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                        <td><button type="button" onclick="Javascript:removeTableRows(this);"">-</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <p>Allergies:</p>
-                    <div class="allergy-drugs">
-                        <label>Food and drug allergies:</label>
-                        <input type="checkbox" id="is-allergy-drugs-denied" onclick="Javascript:checkAllergy(this)" checked>
-                        <label for="is-allergy-drugs-denied">denied</label>
-                        <table id="allergy-drugs-table" style="display:none;">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Adverse effect</th>
-                                    <th><button type="button" onclick="Javascript:addAllergyRows(this);">+</button></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><button type="button" onclick="Javascript:removeAllergyRows(this);">-</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="ph-habits">
+                        <p>Social History and Habits:</p>
+                        <div class="habits-alcohol">
+                            <input type="checkbox" id="is-alcohol" onclick="Javascript:checkHabits(this)">
+                            <label for="is-alcohol">Alcohol:</label>
+                            <input type="number" id="habit-alc-amount" disabled>
+                            <label>cups of</label>
+                            <input type="text" id="habit-alc-type" disabled>
+                            <label>or</label>
+                            <input type="number" id="habit-alc-unit" disabled>
+                            <label for="habit-alc-unit">alcohol(s) or</label>
+                            <input type="checkbox" id="habit-alc-social" disabled>
+                            <label for="habit-alc-social">social drinking</label>
+                        </div>
+                        <div class="habits-betel-nuts">
+                            <input type="checkbox" id="is-betel-nuts" onclick="Javascript:checkHabits(this)">
+                            <label for="is-betel-nuts">Betel nuts:</label>
+                            <input type="number" id="habit-btn-amount" disabled>
+                            <label>PPD for</label>
+                            <input type="number" id="habit-btn-duration" disabled>
+                            <label>year(s), quitted for</label>
+                            <input type="number" id="habit-btn-quitted-duration" disabled>
+                            <label>year(s)</label>
+                        </div>
+                        <div class="habits-smoking">
+                            <input type="checkbox" id="is-smoking" onclick="Javascript:checkHabits(this)">
+                            <label for="is-smoking">Smoking:</label>
+                            <input type="number" id="habit-smoke-amount" disabled>
+                            <label>PPD for</label>
+                            <input type="number" id="habit-smoke-duration" disabled>
+                            <label>year(s), quitted for</label>
+                            <input type="number" id="habit-smoke-quitted-duration" disabled>
+                            <label>year(s)</label>
+                        </div>
+                        <div class="habits-illicit-drugs">
+                            <input type="checkbox" id="is-illicit-drugs" onclick="Javascript:checkHabits(this)">
+                            <label for="is-illicit-drugs">Illicit drugs:</label>
+                            <label>use</label>
+                            <input type="text" id="habit-drug-type" disabled>
+                            <label>for</label>
+                            <input type="text" id="habit-drug-frq" disabled>
+                            <label>frequency through</label>
+                            <input type="text" id="habit-drug-path" disabled>
+                            <label>for</label>
+                            <input type="number" id="habit-drug-duration" disabled>
+                            <label>year(s), quitted for</label>
+                            <input type="number" id="habit-drug-quitted-duration" disabled>
+                            <label>year(s)</label>
+                        </div>
                     </div>
-                    <div class="allergy-materials">
-                        <label>Allergy to medical devices and materals:</label>
-                        <input type="checkbox" id="is-allergy-materials-denied" onclick="Javascript:checkAllergy(this)" checked>
-                        <label for="is-allergy-materials-denied">denied</label>
-                        <table id="allergy-drugs-table" style="display:none;">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Adverse effect</th>
-                                    <th><button type="button" onclick="Javascript:addAllergyRows(this);">+</button></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><button type="button" onclick="Javascript:removeAllergyRows(this);"">-</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="ph-hospital">
+                        <p>Past Hospitalization:</p>
+                        <textarea id="ph-surgery-input"></textarea>
                     </div>
-                </div>
-                <div>
-                    <p>Social History and Habits:</p>
-                    <div class="habits-alcohol">
-                        <input type="checkbox" id="is-alcohol" onclick="Javascript:checkHabits(this)">
-                        <label for="is-alcohol">Alcohol:</label>
-                        <input type="number" id="habit-alc-amount" disabled>
-                        <label>cups of</label>
-                        <input type="text" id="habit-alc-type" disabled>
-                        <label>or</label>
-                        <input type="number" id="habit-alc-unit" disabled>
-                        <label for="habit-alc-unit">alcohol(s) or</label>
-                        <input type="checkbox" id="habit-alc-social" disabled>
-                        <label for="habit-alc-social">social drinking</label>
+                    <div class="ph-surgery">
+                        <p>Past Surgical History:</p>
+                        <textarea id="ph-surgery-input"></textarea>
                     </div>
-                    <div class="habits-betel-nuts">
-                        <input type="checkbox" id="is-betel-nuts" onclick="Javascript:checkHabits(this)">
-                        <label for="is-betel-nuts">Betel nuts:</label>
-                        <input type="number" id="habit-btn-amount" disabled>
-                        <label>PPD for</label>
-                        <input type="number" id="habit-btn-duration" disabled>
-                        <label>year(s), quitted for</label>
-                        <input type="number" id="habit-btn-quitted-duration" disabled>
-                        <label>year(s)</label>
-                    </div>
-                    <div class="habits-smoking">
-                        <input type="checkbox" id="is-smoking" onclick="Javascript:checkHabits(this)">
-                        <label for="is-smoking">Smoking:</label>
-                        <input type="number" id="habit-smoke-amount" disabled>
-                        <label>PPD for</label>
-                        <input type="number" id="habit-smoke-duration" disabled>
-                        <label>year(s), quitted for</label>
-                        <input type="number" id="habit-smoke-quitted-duration" disabled>
-                        <label>year(s)</label>
-                    </div>
-                    <div class="habits-illicit-drugs">
-                        <input type="checkbox" id="is-illicit-drugs" onclick="Javascript:checkHabits(this)">
-                        <label for="is-illicit-drugs">Illicit drugs:</label>
-                        <label>use</label>
-                        <input type="text" id="habit-drug-type" disabled>
-                        <label>for</label>
-                        <input type="text" id="habit-drug-frq" disabled>
-                        <label>frequency through</label>
-                        <input type="text" id="habit-drug-path" disabled>
-                        <label>for</label>
-                        <input type="number" id="habit-drug-duration" disabled>
-                        <label>year(s), quitted for</label>
-                        <input type="number" id="habit-drug-quitted-duration" disabled>
-                        <label>year(s)</label>
+                    <div class="ph-tocc">
+                        <p>TOCC History:</p>
+                        <div class="ph-tocc-duration">
+                            <label for="ph-tocc-duration">Duration:</label>
+                            <input type="text" id="ph-tocc-duration">
+                            <select id="ph-tocc-unit">
+                                <option value="month" selected>month(s)</option>
+                                <option value="week">week(s)</option>
+                                <option value="day">day(s)</option>
+                            </select>
+                        </div>
+                        <div class="ph-tocc-travel">
+                            <label>Travel history:</label>
+                            <input type="checkbox" id="ph-is-travel-denied" onclick="Javascript:checkTable(this)" checked>
+                            <label for="ph-is-travel-denied">denied</label>
+                            <table id="ph-travel-table" style="display:none;">
+                                <thead>
+                                    <tr>
+                                        <th>Destination</th>
+                                        <th>Time Before Admission</th>
+                                        <th><button type="button" onclick="Javascript:addTableRows(this);">+</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                        <td><button type="button" onclick="Javascript:removeTableRows(this);">-</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ph-tocc-occupation">
+                            <label for="ph-tocc-occupation">Occupation:</label>
+                            <input type="text" id="ph-tocc-occupation">
+                            <input type="checkbox" id="ph-tocc-is-retired">
+                            <label for="ph-tocc-is-retired">retired</label>
+                        </div>
+                        <div class="ph-tocc-cluster">
+                            <label>Cluster history:</label>
+                            <input type="checkbox" id="ph-is-cluster-denied" onclick="Javascript:checkTable(this)" checked>
+                            <label for="ph-is-cluster-denied">denied</label>
+                            <table id="ph-cluster-table" style="display:none;">
+                                <thead>
+                                    <tr>
+                                        <th>Cluster Place</th>
+                                        <th>Time Before Admission</th>
+                                        <th><button type="button" onclick="Javascript:addTableRows(this);">+</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                        <td><button type="button" onclick="Javascript:removeTableRows(this);">-</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="ph-tocc-contact">
+                            <label>Contact history:</label>
+                            <input type="checkbox" id="ph-is-contact-denied" onclick="Javascript:checkTable(this)" checked>
+                            <label for="ph-is-contact-denied">denied</label>
+                            <table id="ph-contact-table" style="display:none;">
+                                <thead>
+                                    <tr>
+                                        <th>Contact Object</th>
+                                        <th>Time Before Admission</th>
+                                        <th><button type="button" onclick="Javascript:addTableRows(this);">+</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text"></td>
+                                        <td><input type="text"></td>
+                                        <td><button type="button" onclick="Javascript:removeTableRows(this);">-</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -311,6 +463,11 @@
             </form>
         </div>
     </section>
+    <footer class="footer">
+        <div class="container">
+            <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> YH</p>
+        </div>
+    </footer>
     <script>
         document.getElementById('admission-date').value = new Date().toISOString().substring(0, 10);
     </script>
