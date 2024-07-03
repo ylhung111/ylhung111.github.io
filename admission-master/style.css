@@ -5,8 +5,9 @@ body {
 }
 
 textarea {
-    width: 35vw;
+    width: 67vw;
     height: 20vh;
+    resize: vertical;
     font-size: 1rem;
 }
 
