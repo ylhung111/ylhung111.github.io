@@ -15,8 +15,8 @@ function uniqueArray (arr) {
          if(seen[item] !== 1) {
                seen[item] = 1;
                out[j++] = item;
-         }
-    }
+         };
+    };
     return out;
 };
 function isChecked (checkbox) {
@@ -216,7 +216,7 @@ function briefHistory () {
                 outputString += 'Others: ';
                 break;
             case 2:
-                outputString += 'Chinese and herbal medicine: ';
+                outputString += 'Herbal medicine: ';
                 break;
             case 3:
                 outputString += 'Health supplements: ';
@@ -240,6 +240,70 @@ function briefHistory () {
         bullets[2]['count'] = 0;
     };
     bullets[1]['count'] = 0;
-    // Get Allergies
+    // Get allergies
+    var arrAllergyDrugs = new Array(),
+        arrAllergyMaterials = new Array(),
+        isAllergyDrugsDenied = document.getElementById('ph-is-allergy-drugs-denied').checked,
+        isAllergyMaterialsDenied = document.getElementById('ph-is-allergy-materials-denied').checked;
+    if (!isAllergyDrugsDenied) {
+        var nodeAllergyDrugs = document.getElementById('ph-allergy-drugs-table').getElementsByTagName('input');
+        var arrAllergyDrugsRaw = new Array();
+        for (i in Object.keys(nodeAllergyDrugs)) {
+            arrAllergyDrugsRaw.push(nodeAllergyDrugs[i].value.trim());
+        };
+        arrAllergyDrugs = arrAllergyDrugsRaw.filter(Boolean);
+    };
+    if (!isAllergyMaterialsDenied) {
+        var nodeAllergyMaterials = document.getElementById('ph-allergy-materials-table').getElementsByTagName('input');
+        var arrAllergyMaterialsRaw = new Array();
+        for (i in Object.keys(nodeAllergyMaterials)) {
+            arrAllergyMaterialsRaw.push(nodeAllergyMaterials[i].value.trim());
+        };
+        arrAllergyMaterials = arrAllergyMaterialsRaw.filter(Boolean);
+    };
+    // Write allergies
+    bullets[0]['count'] += 1;
+    outputString += bullets[0]['shape'].replace('0', bullets[0]['count'].toString());
+    outputString += ' Allergy: \n';
+    for (var _ = 0; _ < INDENT; _ += 1) { outputString += ' ' };
+    bullets[1]['count'] += 1;
+    outputString += bullets[1]['shape'].replace('0', bullets[1]['count'].toString());
+    outputString += ' Food and drug allergies: ';
+    if (isAllergyDrugsDenied || !arrAllergyDrugs.length) {
+        outputString += 'denied\n';
+    } else {
+        outputString += '\n';
+        for (i = 0; i < arrAllergyDrugs.length; i += 2) {
+            for (var _ = 0; _ < INDENT * 2; _ += 1) { outputString += ' ' };
+            bullets[2]['count'] += 1;
+            outputString += bullets[2]['shape'].replace('0', bullets[2]['count'].toString());
+            outputString += ' ';
+            outputString += arrAllergyDrugs[i].capitalize();
+            outputString += ': ';
+            outputString += arrAllergyDrugs[i+1];
+            outputString += '\n';
+        };
+    };
+    bullets[2]['count'] = 0;
+    for (var _ = 0; _ < INDENT; _ += 1) { outputString += ' ' };
+    bullets[1]['count'] += 1;
+    outputString += bullets[1]['shape'].replace('0', bullets[1]['count'].toString());
+    outputString += ' Allergy to medical device and materials: ';
+    if (isAllergyMaterialsDenied || !arrAllergyMaterials.length) {
+        outputString += 'denied\n';
+    } else {
+        outputString += '\n';
+        for (i = 0; i < arrAllergyMaterials.length; i += 2) {
+            for (var _ = 0; _ < INDENT * 2; _ += 1) { outputString += ' ' };
+            bullets[2]['count'] += 1;
+            outputString += bullets[2]['shape'].replace('0', bullets[2]['count'].toString());
+            outputString += ' ';
+            outputString += arrAllergyMaterials[i].capitalize();
+            outputString += ': ';
+            outputString += arrAllergyMaterials[i+1];
+            outputString += '\n';
+        };
+    };
+    bullets[1]['count'] = 0;
     document.getElementById('brief-history-output').textContent = outputString;
 };
