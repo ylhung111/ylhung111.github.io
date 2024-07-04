@@ -27,7 +27,7 @@ function copyText (btn) {
     copyTextarea.select();
     copyTextarea.setSelectionRange(0, 99999);
     // navigator.clipboard.writeText(copyTextarea.value.trim());
-    document.execCommand('copy);
+    document.execCommand('copy');
     btn.nextElementSibling.textContent = 'Copied!';
 };
 function loadToday () {
