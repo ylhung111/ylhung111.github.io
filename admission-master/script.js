@@ -26,7 +26,8 @@ function copyText (btn) {
     const copyTextarea = btn.nextElementSibling.nextElementSibling.nextElementSibling;
     copyTextarea.select();
     copyTextarea.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(copyTextarea.value.trim());
+    // navigator.clipboard.writeText(copyTextarea.value.trim());
+    document.execCommand('copy);
     btn.nextElementSibling.textContent = 'Copied!';
 };
 function loadToday () {
